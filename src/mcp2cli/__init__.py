@@ -1738,9 +1738,9 @@ def list_openapi_commands(commands: list[CommandDef]):
 
 
 def list_mcp_commands(commands: list[CommandDef]):
+    fmt = argparse.HelpFormatter("", width=None)
     for cmd in commands:
-        desc = f"  {cmd.description[:70]}" if cmd.description else ""
-        print(f"  {cmd.name:<40}{desc}")
+        print(f"  {cmd.name:<40}  " + "\n".join(fmt._split_lines(cmd.description or "", 80)).replace("\n", "\n" + " " * 44))
 
 
 def _filter_commands(commands: list[CommandDef], pattern: str) -> list[CommandDef]:
